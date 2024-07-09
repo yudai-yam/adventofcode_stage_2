@@ -7,9 +7,9 @@ def read_input():
     with open('input.txt', 'r') as file:
         for index, line in enumerate(file, start=1):
             # if possible -> record index
-            if is_feasible(line):
-                result = result + index
-            print(result)
+            # if is_feasible(line):
+            #     result = result + index
+            result = power_calc(line) + result
 
     return result
 
@@ -38,10 +38,29 @@ def is_feasible(line):
             if int(number) > blue_possession:
                 feasible = False
 
-    print(feasible)
 
     return feasible
         
+def power_calc(line):
+    # get the smallest possible number of each color
+
+    # get a list of numbers for each color
+    red_list = re.findall(r'(\d+)\sred', line)
+    green_list = re.findall(r'(\d+)\sgreen', line)
+    blue_list = re.findall(r'(\d+)\sblue', line)
+
+    # convert them into int
+    red_list = [int(num) for num in red_list]
+    green_list = [int(num) for num in green_list]
+    blue_list = [int(num) for num in blue_list]
+
+    red_max = max(red_list)
+    green_max = max(green_list)
+    blue_max = max(blue_list)
+
+
+    return red_max*green_max*blue_max
+
 
 
 
